@@ -5,11 +5,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculator</title>
 </head>
 
 <body>
+    <form>
+        Value 1: <input type="text" id="value1">
+        Operator:
+        <select id="operator">
+            <option value="add">Add</option>
+            <option value="sub">Subtract</option>
+            <option value="mul">Multiply</option>
+            <option value="div">Divide</option>
+        </select>
+        Value 2: <input type="text" id="value2">
+        <button type="button">Calculate</button>
+    </form>
 
+    <script>
+        function calc() {
+            var a = document.querySelector("#value1");
+        }
+    </script>
 </body>
 
 </html>
