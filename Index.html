@@ -19,8 +19,10 @@
             <option value="div">Divide</option>
         </select>
         Value 2: <input type="text" id="value2">
-        <button type="button">Calculate</button>
+        <button type="button" onclick="calc()">Calculate</button>
     </form>
+
+    <div id="result"></div>
 
     <script>
         function calc() {
@@ -39,7 +41,7 @@
                 calculate = a / b;
             }
 
-            console.log(calculate);
+            document.querySelector("#result").innerHTML = calculate;
         }
     </script>
 </body>
