@@ -10,38 +10,72 @@
 
 <body>
     <form>
-        Value 1: <input type="number" id="value1">
-        Operator:
-        <select id="operator">
-            <option value="add">Add</option>
-            <option value="sub">Subtract</option>
-            <option value="mul">Multiply</option>
-            <option value="div">Divide</option>
+        Value 1: <input type="number" id="txtValue1">
+        <select id="ddlOperator">
+            <option value="add">+</option>
+            <option value="subract">-</option>
+            <option value="multiply">*</option>
+            <option value="divide">/</option>
         </select>
-        Value 2: <input type="text" id="value2">
-        <button type="button" onclick="calc()">Calculate</button>
+        Value 2: <input type="number" id="txtValue2">
+        <button type="button" onclick="doCalculation()">Calculate</button>
     </form>
 
-    <div id="result"></div>
+    <div id="divResult"></div>
 
     <script>
-        function calc() {
-            var a = parseInt(document.querySelector("#value1").value);
-            var b = parseInt(document.querySelector("#value2").value);
-            var op = document.querySelector("#operator").value;
-            var calculate;
+        // function calc() {
+        //     var a = parseInt(document.querySelector("#txtValue1").value);
+        //     var b = parseInt(document.querySelector("#txtValue2").value);
+        //     var op = document.querySelector("#ddlOperator").value;
+        //     var calculate;
 
-            if (op == "add") {
-                calculate = a + b;
-            } else if (op == "sub") {
-                calculate = a - b;
-            } else if (op == "mul") {
-                calculate = a * b;
-            } else if (op == "div") {
-                calculate = a / b;
+        //     if (op == "add") {
+        //         calculate = a + b;
+        //     } else if (op == "subract") {
+        //         calculate = a - b;
+        //     } else if (op == "multiply") {
+        //         calculate = a * b;
+        //     } else if (op == "divide") {
+        //         calculate = a / b;
+        //     }
+
+        //     document.querySelector("#divResult").innerHTML = calculate;
+        // }
+
+        function doCalculation() {
+            const divResult = document.getElementById("divResult");
+
+            const value1 = document.getElementById("txtValue1").value;
+            const operator = document.getElementById("ddlOperator").value;
+            const value2 = document.getElementById("txtValue2").value;
+
+            // validation
+            if (value1 === "" || value2 === "") {
+                divResult.innerHTML = "Please enter a number.";
+                return;
             }
 
-            document.querySelector("#result").innerHTML = calculate;
+            var result = calculate(Number(value1), operator, Number(value2));
+            divResult.innerHTML = result;
+        }
+
+        function calculate(value1, operator, value2) {
+            switch (operator) {
+                case "add": return value1 + value2;
+                case "subract": return value1 - value2;
+                case "multiply": return value1 * value2;
+                case "divide":
+                    if (value2 === 0.00) {
+                        return "Cannot divide by zero.";
+                    }
+                    else {
+                        return value1 / value2;
+                    }
+                    break;
+            }
+
+            return "Operator not defined!";
         }
     </script>
 </body>
