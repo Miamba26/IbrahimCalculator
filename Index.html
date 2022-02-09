@@ -37,13 +37,26 @@
         <div id="divResult_Calc2"></div>
     </form>
 
+    <form style="padding-bottom: 20px">
+        Value 1: <input type="number" id="txtValue1_Calc3">
+        <select id="ddlOperator_Calc3">
+            <option value="add">+</option>
+            <option value="subract">-</option>
+            <option value="multiply">*</option>
+            <option value="divide">/</option>
+        </select>
+        Value 2: <input type="number" id="txtValue2_Calc3">
+        <button type="button"
+            onclick="doCalculation(`txtValue1_Calc3`, `ddlOperator_Calc3`, `txtValue2_Calc3`, `divResult_Calc3`)">Calculate</button>
+        <div id="divResult_Calc3"></div>
+    </form>
 
     <script>
-        function doCalculation(txtValue1, ddlOperator, txtValue2, divResult_Calc1, divResult_Calc2) {
+        function doCalculation(txtValue1, ddlOperator, txtValue2, divResult_Calc) {
             const value1 = document.getElementById(txtValue1).value;
             const operator = document.getElementById(ddlOperator).value;
             const value2 = document.getElementById(txtValue2).value;
-            const divResult = document.getElementById(divResult_Calc1, divResult_Calc2);
+            const divResult = document.getElementById(divResult_Calc);
 
             // validation
             if (value1 === "" || value2 === "") {
