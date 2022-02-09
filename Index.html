@@ -9,46 +9,41 @@
 </head>
 
 <body>
-    <form>
-        Value 1: <input type="number" id="txtValue1">
-        <select id="ddlOperator">
+    <form style="padding-bottom: 20px">
+        Value 1: <input type="number" id="txtValue1_Calc1">
+        <select id="ddlOperator_Calc1">
             <option value="add">+</option>
             <option value="subract">-</option>
             <option value="multiply">*</option>
             <option value="divide">/</option>
         </select>
-        Value 2: <input type="number" id="txtValue2">
-        <button type="button" onclick="doCalculation()">Calculate</button>
+        Value 2: <input type="number" id="txtValue2_Calc1">
+        <button type="button"
+            onclick="doCalculation(`txtValue1_Calc1`, `ddlOperator_Calc1`, `txtValue2_Calc1`, `divResult_Calc1`)">Calculate</button>
+        <div id="divResult_Calc1"></div>
     </form>
 
-    <div id="divResult"></div>
+    <form style="padding-bottom: 20px">
+        Value 1: <input type="number" id="txtValue1_Calc2">
+        <select id="ddlOperator_Calc2">
+            <option value="add">+</option>
+            <option value="subract">-</option>
+            <option value="multiply">*</option>
+            <option value="divide">/</option>
+        </select>
+        Value 2: <input type="number" id="txtValue2_Calc2">
+        <button type="button"
+            onclick="doCalculation(`txtValue1_Calc2`, `ddlOperator_Calc2`, `txtValue2_Calc2`, `divResult_Calc2`)">Calculate</button>
+        <div id="divResult_Calc2"></div>
+    </form>
+
 
     <script>
-        // function calc() {
-        //     var a = parseInt(document.querySelector("#txtValue1").value);
-        //     var b = parseInt(document.querySelector("#txtValue2").value);
-        //     var op = document.querySelector("#ddlOperator").value;
-        //     var calculate;
-
-        //     if (op == "add") {
-        //         calculate = a + b;
-        //     } else if (op == "subract") {
-        //         calculate = a - b;
-        //     } else if (op == "multiply") {
-        //         calculate = a * b;
-        //     } else if (op == "divide") {
-        //         calculate = a / b;
-        //     }
-
-        //     document.querySelector("#divResult").innerHTML = calculate;
-        // }
-
-        function doCalculation() {
-            const divResult = document.getElementById("divResult");
-
-            const value1 = document.getElementById("txtValue1").value;
-            const operator = document.getElementById("ddlOperator").value;
-            const value2 = document.getElementById("txtValue2").value;
+        function doCalculation(txtValue1, ddlOperator, txtValue2, divResult_Calc1, divResult_Calc2) {
+            const value1 = document.getElementById(txtValue1).value;
+            const operator = document.getElementById(ddlOperator).value;
+            const value2 = document.getElementById(txtValue2).value;
+            const divResult = document.getElementById(divResult_Calc1, divResult_Calc2);
 
             // validation
             if (value1 === "" || value2 === "") {
