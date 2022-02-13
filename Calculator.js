@@ -1,9 +1,22 @@
-function doCalculation(txtValue1_Id, ddlOperator_Id, txtValue2_Id, divResult_Id) {
-    const value1 = document.getElementById(txtValue1_Id).value;
-    const operator = document.getElementById(ddlOperator_Id).value;
-    const value2 = document.getElementById(txtValue2_Id).value;
-    const divResult = document.getElementById(divResult_Id);
+function bindCalculators() {
+    const btn_Calcs = document.querySelectorAll("[name='btn_Calc']");
 
+    for (let i = 0; i < btn_Calcs.length; i++) {
+        const btn_Calc = btn_Calcs[i];
+        const parentBtn_Calc = btn_Calc.parentElement;
+
+        const txtValue1 = parentBtn_Calc.querySelector("[name='txtValue1_Calc']");
+        const ddlOperator = parentBtn_Calc.querySelector("[name='ddlOperator_Calc']");
+        const txtValue2 = parentBtn_Calc.querySelector("[name='txtValue2_Calc']");
+        const divResult = parentBtn_Calc.querySelector("[name='divResult_Calc']");
+
+        btn_Calc.addEventListener("click", function () {
+            doCalculation(txtValue1.value, ddlOperator.value, txtValue2.value, divResult);
+        });
+    }
+}
+
+function doCalculation(value1, operator, value2, divResult) {
     // validation
     if (value1 === "" || value2 === "") {
         divResult.innerHTML = "Please enter a number.";
