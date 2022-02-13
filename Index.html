@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <!-- CALC 1 -->
     <form style="padding-bottom: 20px">
         Value 1: <input type="number" id="txtValue1_Calc1">
         <select id="ddlOperator_Calc1">
@@ -23,6 +24,7 @@
         <div id="divResult_Calc1"></div>
     </form>
 
+    <!-- CALC 2 -->
     <form style="padding-bottom: 20px">
         Value 1: <input type="number" id="txtValue1_Calc2">
         <select id="ddlOperator_Calc2">
@@ -37,6 +39,7 @@
         <div id="divResult_Calc2"></div>
     </form>
 
+    <!-- CALC 3 -->
     <form style="padding-bottom: 20px">
         Value 1: <input type="number" id="txtValue1_Calc3">
         <select id="ddlOperator_Calc3">
@@ -51,12 +54,13 @@
         <div id="divResult_Calc3"></div>
     </form>
 
+    <!-- Javascript -->
     <script>
-        function doCalculation(txtValue1, ddlOperator, txtValue2, divResult_Calc) {
-            const value1 = document.getElementById(txtValue1).value;
-            const operator = document.getElementById(ddlOperator).value;
-            const value2 = document.getElementById(txtValue2).value;
-            const divResult = document.getElementById(divResult_Calc);
+        function doCalculation(txtValue1_Id, ddlOperator_Id, txtValue2_Id, divResult_Id) {
+            const value1 = document.getElementById(txtValue1_Id).value;
+            const operator = document.getElementById(ddlOperator_Id).value;
+            const value2 = document.getElementById(txtValue2_Id).value;
+            const divResult = document.getElementById(divResult_Id);
 
             // validation
             if (value1 === "" || value2 === "") {
