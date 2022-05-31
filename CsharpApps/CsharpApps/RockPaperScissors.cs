@@ -16,72 +16,91 @@ namespace CsharpApps
 
             do
             {
-                Console.Write("Enter first number: ");
-                string? num1Str = Console.ReadLine();
-
-                Console.Write("Enter operation (A-Add, S-Subtract, M-Multiply, D-Divide): ");
-                string? operation = Console.ReadLine();
-
-                Console.Write("Enter second number: ");
-                string? num2Str = Console.ReadLine();
-
-                int? result = Calculate(num1Str, operation, num2Str);
-
-                if (result != null)
-                {
-                    Console.WriteLine("Result is: " + result);
-                }
-                else
-                {
-                    Console.WriteLine($"Could not calculate {num1Str} {operation} {num2Str}");
-                }
-
                 Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("Choose rock, paper or scissors");
+                string? userChoice = Console.ReadLine();
+                if (userChoice != null && userChoice == "exit") return;
+
+                Random rnd = new Random();
+                int computerChoice = rnd.Next(1,4);
+
+                if (computerChoice == 1)
+                {
+                    if (userChoice == "rock")
+                    {
+                        Console.WriteLine("The computer chose rock");
+                        Console.WriteLine("It is a tie ");
+                    }
+                    else if (userChoice == "paper")
+                    {
+                        Console.WriteLine("The computer chose paper");
+                        Console.WriteLine("It is a tie ");
+
+                    }
+                    else if (userChoice == "scissors")
+                    {
+                        Console.WriteLine("The computer chose scissors");
+                        Console.WriteLine("It is a tie ");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Choose rock, paper or scissors");
+
+                    }
+
+                }
+                else if (computerChoice == 2)
+                {
+                    if (userChoice == "rock")
+                    {
+                        Console.WriteLine("The computer chose paper");
+                        Console.WriteLine("You lose, paper beat rock");
+
+                    }
+                    else if (userChoice == "paper")
+                    {
+                        Console.WriteLine("The computer chose scissors");
+                        Console.WriteLine("You lose, scissors beat paper ");
+
+                    }
+                    else if (userChoice == "scissors")
+                    {
+                        Console.WriteLine("The computer chose rock");
+                        Console.WriteLine("You lose, rock beats scissors");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Choose rock, paper or scissors");
+                    }
+                }
+                else if (computerChoice == 3)
+                {
+                    if (userChoice == "rock")
+                    {
+                        Console.WriteLine("The computer chose scissors");
+                        Console.WriteLine("You win, rock beats scissors");
+
+                    }
+                    else if (userChoice == "paper")
+                    {
+                        Console.WriteLine("The computer chose rock");
+                        Console.WriteLine("You win, paper beats rock");
+
+                    }
+                    else if (userChoice == "scissors")
+                    {
+                        Console.WriteLine("The computer chose paper");
+                        Console.WriteLine("You win, scissors beat paper");
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("Choose rock, paper or scissors");
+
+                    }
+                }
             } while (true);
-        }
-
-        private int? Calculate(string? num1Str, string? operation, string? num2Str)
-        {
-            int? result = null;
-
-            // check inputs are valid
-
-            int? num1 = null;
-            if (int.TryParse(num1Str, out int number1))
-            {
-                num1 = number1;
-            }
-
-            int? num2 = null;
-            if (int.TryParse(num2Str, out int number2))
-            {
-                num2 = number2;
-            }
-
-            switch (operation)
-            {
-                case "A":
-                case "a":
-                    result = num1 + num2;
-                    break;
-
-                case "B":
-                case "b":
-                    result = num1 - num2;
-                    break;
-
-                case "C":
-                case "c":
-                    result = num1 * num2;
-                    break;
-
-                case "D":
-                case "d":
-                    result = num1 / num2;
-                    break;
-            }
-
-            return result;
         }
     }
 }
