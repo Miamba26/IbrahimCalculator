@@ -22,8 +22,8 @@ namespace CsharpApps
                 string? userChoice = Console.ReadLine();
                 if (userChoice != null && userChoice == "exit") return;
 
-                Random rnd = new Random();
-                int computerChoice = rnd.Next(1,4);
+                Random rnd = new();
+                int computerChoice = rnd.Next(1, 4);
 
                 if (computerChoice == 1)
                 {
@@ -36,7 +36,6 @@ namespace CsharpApps
                     {
                         Console.WriteLine("The computer chose paper");
                         Console.WriteLine("It is a tie ");
-
                     }
                     else if (userChoice == "scissors")
                     {
@@ -46,7 +45,6 @@ namespace CsharpApps
                     else
                     {
                         Console.WriteLine("Choose rock, paper or scissors");
-
                     }
 
                 }
@@ -80,24 +78,20 @@ namespace CsharpApps
                     {
                         Console.WriteLine("The computer chose scissors");
                         Console.WriteLine("You win, rock beats scissors");
-
                     }
                     else if (userChoice == "paper")
                     {
                         Console.WriteLine("The computer chose rock");
                         Console.WriteLine("You win, paper beats rock");
-
                     }
                     else if (userChoice == "scissors")
                     {
                         Console.WriteLine("The computer chose paper");
                         Console.WriteLine("You win, scissors beat paper");
-
                     }
                     else
                     {
                         Console.WriteLine("Choose rock, paper or scissors");
-
                     }
                 }
             } while (true);
