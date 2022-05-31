@@ -10,7 +10,7 @@ namespace CsharpApps
     {
         public void RunApp()
         {
-            Console.Write("Running Calulator...");
+            Console.Write("Running Calculator...");
             Console.WriteLine();
             Console.WriteLine();
 
@@ -18,6 +18,7 @@ namespace CsharpApps
             {
                 Console.Write("Enter first number: ");
                 string? num1Str = Console.ReadLine();
+                if (num1Str != null && num1Str == "exit") return;
 
                 Console.Write("Enter operation (A-Add, S-Subtract, M-Multiply, D-Divide): ");
                 string? operation = Console.ReadLine();
