@@ -1,4 +1,4 @@
-﻿namespace CsharpRPS
+﻿namespace CsharpApps
 {
     internal class Program
     {
