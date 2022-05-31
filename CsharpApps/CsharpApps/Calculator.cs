@@ -12,6 +12,7 @@ namespace CsharpApps
         {
             Console.Write("Running Calulator...");
             Console.WriteLine();
+            Console.WriteLine();
 
             do
             {

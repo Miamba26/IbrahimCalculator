@@ -12,6 +12,7 @@ namespace CsharpApps
         {
             Console.Write("Running Rock, Paper Scissors...");
             Console.WriteLine();
+            Console.WriteLine();
 
             do
             {
