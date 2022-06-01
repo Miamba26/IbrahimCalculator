@@ -22,16 +22,21 @@ namespace CsharpApps
                 RPSType? player1Value = GetPlayer1Value();
                 RPSType player2Value = GetPlayer2Value();
 
-                if (player1Value==null) return;
-                
+                // should we exit the app
+                if (player1Value == null) return;
+
+                // find out who won
+                string winner = GetWinner(player1Value.Value, player2Value);
+
+                Console.WriteLine("Player 1 chose " + player1Value.Value + ", Player 2 chose " + player2Value);
+                Console.WriteLine(winner);
+
             } while (true);
         }
 
-        enum RPSType
+        private string GetWinner(RPSType player1Value, RPSType player2Value)
         {
-            Rock,
-            Paper,
-            Scissors
+            return "The winner is Player 2";
         }
 
         private RPSType? GetPlayer1Value()
@@ -73,6 +78,13 @@ namespace CsharpApps
                 case 2: return RPSType.Paper;
                 default: return RPSType.Scissors;
             }
+        }
+
+        enum RPSType
+        {
+            Rock,
+            Paper,
+            Scissors
         }
     }
 }
