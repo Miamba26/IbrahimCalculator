@@ -36,7 +36,23 @@ namespace CsharpApps
 
         private string GetWinner(RPSType player1Value, RPSType player2Value)
         {
-            return "The winner is Player 2";
+            const string player1Wins = "The winner is Player 1";
+            const string player2Wins = "The winner is Player 2";
+            const string itsADraw = "It's a draw!";
+
+            if (player1Value == RPSType.Rock && player2Value == RPSType.Rock) return itsADraw;
+            if (player1Value == RPSType.Rock && player2Value == RPSType.Paper) return player2Wins;
+            if (player1Value == RPSType.Rock && player2Value == RPSType.Scissors) return player1Wins;
+
+            if (player1Value == RPSType.Paper && player2Value == RPSType.Rock) return player1Wins;
+            if (player1Value == RPSType.Paper && player2Value == RPSType.Paper) return itsADraw;
+            if (player1Value == RPSType.Paper && player2Value == RPSType.Scissors) return player2Wins;
+
+            if (player1Value == RPSType.Scissors && player2Value == RPSType.Rock) return player2Wins;
+            if (player1Value == RPSType.Scissors && player2Value == RPSType.Paper) return player1Wins;
+            if (player1Value == RPSType.Scissors && player2Value == RPSType.Scissors) return itsADraw;
+
+            return "";
         }
 
         private RPSType? GetPlayer1Value()
@@ -88,68 +104,3 @@ namespace CsharpApps
         }
     }
 }
-
-
-//switch (random.Next(1, 4))
-//{
-//    case 1:
-//        computer = "rock";
-//        break;
-
-//    case 2:
-//        computer = "paper";
-//        break;
-
-//    case 3:
-//        computer = "scissors";
-//        break;
-//}
-
-
-//switch (player)
-//{
-//    case "rock":
-//        if (computer == "rock")
-//        {
-//            Console.WriteLine("It's a draw!");
-//        }
-//        else if (computer == "paper")
-//        {
-//            Console.WriteLine("You lose!");
-//        }
-//        else
-//        {
-//            Console.WriteLine("You win!");
-//        }
-//        break;
-
-//    case "paper":
-//        if (computer == "rock")
-//        {
-//            Console.WriteLine("You win!");
-//        }
-//        else if (computer == "paper")
-//        {
-//            Console.WriteLine("It's a draw!");
-//        }
-//        else
-//        {
-//            Console.WriteLine("You lose!");
-//        }
-//        break;
-//
-//   case "scissors":
-//        if (computer == "rock")
-//        {
-//            Console.WriteLine("You lose!");
-//        }
-//        else if (computer == "paper")
-//        {
-//            Console.WriteLine("You win!");
-//        }
-//        else
-//        {
-//            Console.WriteLine("It's a draw!");
-//        }
-//        break;
-//}
