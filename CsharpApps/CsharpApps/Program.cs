@@ -19,7 +19,7 @@
                         break;
 
                     case "2":
-                        RockPaperScissors_v2 rps = new();
+                        RockPaperScissors_v3 rps = new();
                         rps.RunApp();
                         break;
 
