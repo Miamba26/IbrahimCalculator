@@ -99,23 +99,29 @@ namespace CsharpApps
         {
             if (_player1Values.Count < 4)
             {
-                // choose a random number
-
-                Random rnd = new();
-                int computerChoice = rnd.Next(1, 4);
-
-                switch (computerChoice)
-                {
-                    case 1: return RPSType.Rock;
-                    case 2: return RPSType.Paper;
-                    default: return RPSType.Scissors;
-                }
+                return GenerateRandomChoice();
             }
             else
             {
-                // use some smart logic to determine what player 1 might have chosen
+                return GenerateSmartChoice();
+            }
+        }
 
-                return RPSType.Rock;
+        private RPSType GenerateSmartChoice()
+        {
+            return RPSType.Paper;
+        }
+
+        private RPSType GenerateRandomChoice()
+        {
+            Random rnd = new();
+            int randomChoice = rnd.Next(1, 4);
+
+            switch (randomChoice)
+            {
+                case 1: return RPSType.Rock;
+                case 2: return RPSType.Paper;
+                default: return RPSType.Scissors;
             }
         }
 
