@@ -109,6 +109,8 @@ namespace CsharpApps
 
         private RPSType GenerateSmartChoice()
         {
+            var GenerateSmartChoice = _player1Values.OrderByDescending(g => g.Count());
+
             return RPSType.Paper;
         }
 
