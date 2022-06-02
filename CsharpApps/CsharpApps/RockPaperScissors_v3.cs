@@ -8,6 +8,8 @@ namespace CsharpApps
 {
     internal class RockPaperScissors_v3
     {
+        List<RPSType> _player1Values = new List<RPSType>();
+
         public void RunApp()
         {
             Console.Write("Running Rock, Paper Scissors...");
@@ -57,6 +59,8 @@ namespace CsharpApps
 
         private RPSType? GetPlayer1Value()
         {
+            RPSType? result = null;
+
             do
             {
                 Console.WriteLine("Player 1, select (r)ock, (p)aper or (s)cissors");
@@ -69,9 +73,9 @@ namespace CsharpApps
                 {
                     switch (playerChoice)
                     {
-                        case "r": return RPSType.Rock;
-                        case "p": return RPSType.Paper;
-                        case "s": return RPSType.Scissors;
+                        case "r": result = RPSType.Rock; break;
+                        case "p": result = RPSType.Paper; break;
+                        case "s": result = RPSType.Scissors; break;
                         case "exit": return null;
                     }
                 }
@@ -80,7 +84,15 @@ namespace CsharpApps
                     Console.WriteLine("INVALID SELECTION!! Try again.");
                     Console.WriteLine();
                 }
-            } while (true);
+            } while (result == null);
+
+            // add player 1 result to our list
+            if (result != null)
+            {
+                _player1Values.Add(result.Value);
+            }
+
+            return result;
         }
 
         private RPSType GetPlayer2Value()
