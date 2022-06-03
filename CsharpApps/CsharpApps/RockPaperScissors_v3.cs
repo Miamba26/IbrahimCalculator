@@ -109,15 +109,21 @@ namespace CsharpApps
 
         private RPSType GenerateSmartChoice()
         {
-            var GenerateSmartChoice = _player1Values.OrderByDescending(g => g.Count());
+            int rockCount = _player1Values.Where(p => p == RPSType.Rock).Count();
+            int paperCount = _player1Values.Where(p => p == RPSType.Paper).Count();
+            int scissorsCount = _player1Values.Where(p => p == RPSType.Scissors).Count();
 
-            return RPSType.Paper;
+            if (rockCount > paperCount && rockCount > scissorsCount) return RPSType.Paper;
+            if (paperCount > rockCount && paperCount > scissorsCount) return RPSType.Scissors;
+            if (scissorsCount > rockCount && scissorsCount > paperCount) return RPSType.Rock;
+
+            return RPSType.Rock;
         }
 
         private RPSType GenerateRandomChoice()
         {
             Random rnd = new();
-            int randomChoice = rnd.Next(1, 4);
+            int randomChoice = rnd.Next(minValue: 1, maxValue: 4);
 
             switch (randomChoice)
             {
