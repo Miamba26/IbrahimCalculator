@@ -109,13 +109,35 @@ namespace CsharpApps
 
         private RPSType GenerateSmartChoice()
         {
-            int rockCount = _player1Values.Where(p => p == RPSType.Rock).Count();
-            int paperCount = _player1Values.Where(p => p == RPSType.Paper).Count();
-            int scissorsCount = _player1Values.Where(p => p == RPSType.Scissors).Count();
+            //int rockCount = _player1Values.Where(p => p == RPSType.Rock).Count();
+            //int paperCount = _player1Values.Where(p => p == RPSType.Paper).Count();
+            //int scissorsCount = _player1Values.Where(p => p == RPSType.Scissors).Count();
 
-            if (rockCount > paperCount && rockCount > scissorsCount) return RPSType.Paper;
-            if (paperCount > rockCount && paperCount > scissorsCount) return RPSType.Scissors;
-            if (scissorsCount > rockCount && scissorsCount > paperCount) return RPSType.Rock;
+            //if (rockCount > paperCount && rockCount > scissorsCount) return RPSType.Paper;
+            //if (paperCount > rockCount && paperCount > scissorsCount) return RPSType.Scissors;
+            //if (scissorsCount > rockCount && scissorsCount > paperCount) return RPSType.Rock;
+
+            //return RPSType.Rock;
+
+
+            var player1ValuesGrouped = from p in _player1Values
+                                       group p by p into pGroup
+                                       orderby pGroup.Count() descending
+                                       select pGroup;
+
+            var player1ValuesFirstGroup = player1ValuesGrouped.FirstOrDefault();
+
+            if (player1ValuesFirstGroup != null)
+            {
+                RPSType mostSelectedByPlayer1 = player1ValuesFirstGroup.Key;
+
+                switch (mostSelectedByPlayer1)
+                {
+                    case RPSType.Rock: return RPSType.Paper;
+                    case RPSType.Paper: return RPSType.Scissors;
+                    case RPSType.Scissors: return RPSType.Rock;
+                }
+            }
 
             return RPSType.Rock;
         }
