@@ -131,7 +131,7 @@ namespace CsharpApps
                 string? userInput = Console.ReadLine();
 
                 if (!string.IsNullOrEmpty(userInput) &&
-                    (userInput.Equals("1") ||
+                    (userInput.Equals("1")||
                     userInput.Equals("2") ||
                     userInput.Equals("3") ||
                     userInput.Equals("4") ||
