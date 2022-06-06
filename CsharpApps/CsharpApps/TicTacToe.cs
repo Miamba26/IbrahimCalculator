@@ -12,7 +12,8 @@ namespace CsharpApps
         {
             int gameStatus = 0;
             int currentPlayer = -1;
-            char[] gameMarkers = { '1', '2', '3', '4', '5', '6', '7', '8', '9', };
+            char[] gameMarkers = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+
             do
             {
                 Console.Clear();
@@ -28,40 +29,37 @@ namespace CsharpApps
 
             } while (gameStatus.Equals(0));
 
+            Console.Clear();
+            UserInstructions(currentPlayer);
+            DrawGameBoard(gameMarkers);
+
             if (gameStatus.Equals(1))
             {
-                Console.Clear();
-                UserInstructions(currentPlayer);
-                DrawGameBoard(gameMarkers);
-
                 Console.WriteLine($"Player {currentPlayer} is the winner!");
             }
 
             if (gameStatus.Equals(2))
             {
-                Console.Clear();
-                UserInstructions(currentPlayer);
-                DrawGameBoard(gameMarkers);
-
                 Console.WriteLine($"The game is a draw!");
             }
         }
 
         private static int GetWinner(char[] gameMarkers)
         {
-            if (isGameDraw(gameMarkers))
-            {
-                return 2;
-            }
-
             if (IsGameWinner(gameMarkers))
             {
                 return 1;
             }
+            
+            if (IsGameDraw(gameMarkers))
+            {
+                return 2;
+            }
+            
             return 0;
         }
 
-        private static bool isGameDraw(char[] gameMarkers)
+        private static bool IsGameDraw(char[] gameMarkers)
         {
             return gameMarkers[0] != '1' &&
                    gameMarkers[1] != '2' &&
@@ -124,8 +122,10 @@ namespace CsharpApps
             return testGameMarkers[pos1].Equals(testGameMarkers[pos2]) && testGameMarkers[pos2].Equals(testGameMarkers[pos3]);
         }
 
-        private void GameLogic(char[] gameMarkers, int currentPlayer)
+        private static void GameLogic(char[] gameMarkers, int currentPlayer)
         {
+            bool notValidMove = true;
+
             do
             {
                 string? userInput = Console.ReadLine();
@@ -154,12 +154,18 @@ namespace CsharpApps
                     else
                     {
                         gameMarkers[gamePlacementMarkers - 1] = GetPlayerMarker(currentPlayer);
+
+                        notValidMove = false;
                     }
                 }
-            } while (true);
+                else
+                {
+                    Console.WriteLine("Invalid value please select another slot.");
+                }
+            } while (notValidMove);
         }
 
-        private char GetPlayerMarker(int Player)
+        private static char GetPlayerMarker(int Player)
         {
             if (Player % 2 == 0)
             {
