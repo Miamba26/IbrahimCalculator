@@ -128,6 +128,7 @@ namespace CsharpApps
 
             do
             {
+                //Update gameboard when player places markers
                 string? userInput = Console.ReadLine();
 
                 if (!string.IsNullOrEmpty(userInput) &&
@@ -181,7 +182,7 @@ namespace CsharpApps
             Console.WriteLine();
             Console.WriteLine();
 
-            //Choose symbol
+            //Show which player represents which symbol
             Console.WriteLine("Player 1: X");
             Console.WriteLine("Player 2: O");
             Console.WriteLine();
@@ -194,6 +195,7 @@ namespace CsharpApps
         static void DrawGameBoard(char[] gameMarkers)
         {
             //Draw gameboard
+            //numbered 1-8 because array starts at zero
             Console.WriteLine($" {gameMarkers[0]} | {gameMarkers[1]} | {gameMarkers[2]} ");
             Console.WriteLine("---+---+---");
             Console.WriteLine($" {gameMarkers[3]} | {gameMarkers[4]} | {gameMarkers[5]} ");
@@ -201,6 +203,7 @@ namespace CsharpApps
             Console.WriteLine($" {gameMarkers[6]} | {gameMarkers[7]} | {gameMarkers[8]} ");
         }
 
+        //Alternate choosing player after every turn
         static int GetNextPlayer(int player)
         {
             if (player.Equals(1))
