@@ -192,7 +192,7 @@ namespace CsharpApps
             Console.WriteLine();
         }
 
-         //Draw gameboard
+        //Draw gameboard
         static void DrawGameBoard(char[] gameMarkers)
         {
             //numbered 1-8 because array starts at zero
