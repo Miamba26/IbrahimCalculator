@@ -173,7 +173,7 @@ namespace CsharpApps
                 return 'O';
             }
 
-            return 'x';
+            return 'X';
         }
 
         static void UserInstructions(int PlayerNumber)
