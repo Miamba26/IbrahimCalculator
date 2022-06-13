@@ -8,7 +8,7 @@
             {
                 Console.WriteLine();
                 Console.WriteLine();
-                Console.Write("Which Program would you like to run? (1-Calculator, 2-RockPaperScissors, 3-TicTacToe): ");
+                Console.Write("Which Program would you like to run? (1-Calculator, 2-RockPaperScissors, 3-TicTacToe, 4-Snake): ");
                 string? app = Console.ReadLine();
 
                 switch (app)
@@ -26,6 +26,11 @@
                     case "3":
                         TicTacToe ttt = new();
                         ttt.RunApp();
+                        break;
+
+                    case "4":
+                        Snake snake = new();
+                        snake.RunApp();
                         break;
 
                     default:
