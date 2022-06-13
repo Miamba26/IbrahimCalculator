@@ -44,6 +44,101 @@ namespace CsharpApps
             }
         }
 
+        //Instructions
+        static void UserInstructions(int PlayerNumber)
+        {
+            Console.Write("Running Tic Tac Toe...");
+            Console.WriteLine();
+            Console.WriteLine();
+
+            //Show which player represents which symbol
+            Console.WriteLine("Player 1: X");
+            Console.WriteLine("Player 2: O");
+            Console.WriteLine();
+
+            //Who's turn is it?
+            Console.WriteLine($"Player {PlayerNumber} to move, select 1 through 9 from the game board.");
+            Console.WriteLine();
+        }
+
+        //Draw gameboard
+        static void DrawGameBoard(char[] gameMarkers)
+        {
+            //numbered 1-8 because array starts at zero
+            Console.WriteLine($" {gameMarkers[0]} | {gameMarkers[1]} | {gameMarkers[2]} ");
+            Console.WriteLine("---+---+---");
+            Console.WriteLine($" {gameMarkers[3]} | {gameMarkers[4]} | {gameMarkers[5]} ");
+            Console.WriteLine("---+---+---");
+            Console.WriteLine($" {gameMarkers[6]} | {gameMarkers[7]} | {gameMarkers[8]} ");
+        }
+
+        //Game Logic
+        private static void GameLogic(char[] gameMarkers, int currentPlayer)
+        {
+            bool notValidMove = true;
+
+            do
+            {
+                //Update gameboard when player places markers
+                string? userInput = Console.ReadLine();
+
+                if (!string.IsNullOrEmpty(userInput) &&
+                    (userInput.Equals("1")||
+                    userInput.Equals("2") ||
+                    userInput.Equals("3") ||
+                    userInput.Equals("4") ||
+                    userInput.Equals("5") ||
+                    userInput.Equals("6") ||
+                    userInput.Equals("7") ||
+                    userInput.Equals("8") ||
+                    userInput.Equals("9")))
+                {
+                    Console.Clear();
+
+                    int.TryParse(userInput, out var gamePlacementMarkers);
+
+                    char currentMarker = gameMarkers[gamePlacementMarkers - 1];
+
+                    if (currentMarker.Equals('X') || currentMarker.Equals('O'))
+                    {
+                        Console.WriteLine("This slot has already been marked, please select another slot.");
+                    }
+                    else
+                    {
+                        gameMarkers[gamePlacementMarkers - 1] = GetPlayerMarker(currentPlayer);
+
+                        notValidMove = false;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid value please select another slot.");
+                }
+            } while (notValidMove);
+        }
+
+        //Who's turn is it?
+        private static char GetPlayerMarker(int Player)
+        {
+            if (Player % 2 == 0)
+            {
+                return 'O';
+            }
+
+            return 'X';
+        }
+
+        //Alternate choosing player after every turn
+        static int GetNextPlayer(int player)
+        {
+            if (player.Equals(1))
+            {
+                return 2;
+            }
+                return 1;
+        }
+
+        //Game Result
         private static int GetWinner(char[] gameMarkers)
         {
             if (IsGameWinner(gameMarkers))
@@ -59,19 +154,7 @@ namespace CsharpApps
             return 0;
         }
 
-        private static bool IsGameDraw(char[] gameMarkers)
-        {
-            return gameMarkers[0] != '1' &&
-                   gameMarkers[1] != '2' &&
-                   gameMarkers[2] != '3' &&
-                   gameMarkers[3] != '4' &&
-                   gameMarkers[4] != '5' &&
-                   gameMarkers[5] != '6' &&
-                   gameMarkers[6] != '7' &&
-                   gameMarkers[7] != '8' &&
-                   gameMarkers[8] != '9';
-        }
-
+        //Win outcomes
         private static bool IsGameWinner(char[] gameMarkers)
         {
             if (IsGameMarkersTheSame(gameMarkers, 0, 1, 2))
@@ -117,100 +200,24 @@ namespace CsharpApps
             return false;
         }
 
+        //Draw outcome
+        private static bool IsGameDraw(char[] gameMarkers)
+        {
+            return gameMarkers[0] != '1' &&
+                   gameMarkers[1] != '2' &&
+                   gameMarkers[2] != '3' &&
+                   gameMarkers[3] != '4' &&
+                   gameMarkers[4] != '5' &&
+                   gameMarkers[5] != '6' &&
+                   gameMarkers[6] != '7' &&
+                   gameMarkers[7] != '8' &&
+                   gameMarkers[8] != '9';
+        }
+
+        //Can't use marked tile
         private static bool IsGameMarkersTheSame(char[] testGameMarkers, int pos1, int pos2, int pos3)
         {
             return testGameMarkers[pos1].Equals(testGameMarkers[pos2]) && testGameMarkers[pos2].Equals(testGameMarkers[pos3]);
-        }
-
-        private static void GameLogic(char[] gameMarkers, int currentPlayer)
-        {
-            bool notValidMove = true;
-
-            do
-            {
-                //Update gameboard when player places markers
-                string? userInput = Console.ReadLine();
-
-                if (!string.IsNullOrEmpty(userInput) &&
-                    (userInput.Equals("1")||
-                    userInput.Equals("2") ||
-                    userInput.Equals("3") ||
-                    userInput.Equals("4") ||
-                    userInput.Equals("5") ||
-                    userInput.Equals("6") ||
-                    userInput.Equals("7") ||
-                    userInput.Equals("8") ||
-                    userInput.Equals("9")))
-                {
-                    Console.Clear();
-
-                    int.TryParse(userInput, out var gamePlacementMarkers);
-
-                    char currentMarker = gameMarkers[gamePlacementMarkers - 1];
-
-                    if (currentMarker.Equals('X') || currentMarker.Equals('O'))
-                    {
-                        Console.WriteLine("This slot has already been marked, please select another slot.");
-                    }
-                    else
-                    {
-                        gameMarkers[gamePlacementMarkers - 1] = GetPlayerMarker(currentPlayer);
-
-                        notValidMove = false;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Invalid value please select another slot.");
-                }
-            } while (notValidMove);
-        }
-
-        private static char GetPlayerMarker(int Player)
-        {
-            if (Player % 2 == 0)
-            {
-                return 'O';
-            }
-
-            return 'X';
-        }
-
-        static void UserInstructions(int PlayerNumber)
-        {
-            Console.Write("Running Tic Tac Toe...");
-            Console.WriteLine();
-            Console.WriteLine();
-
-            //Show which player represents which symbol
-            Console.WriteLine("Player 1: X");
-            Console.WriteLine("Player 2: O");
-            Console.WriteLine();
-
-            //Who's turn is it?
-            Console.WriteLine($"Player {PlayerNumber} to move, select 1 through 9 from the game board.");
-            Console.WriteLine();
-        }
-
-        //Draw gameboard
-        static void DrawGameBoard(char[] gameMarkers)
-        {
-            //numbered 1-8 because array starts at zero
-            Console.WriteLine($" {gameMarkers[0]} | {gameMarkers[1]} | {gameMarkers[2]} ");
-            Console.WriteLine("---+---+---");
-            Console.WriteLine($" {gameMarkers[3]} | {gameMarkers[4]} | {gameMarkers[5]} ");
-            Console.WriteLine("---+---+---");
-            Console.WriteLine($" {gameMarkers[6]} | {gameMarkers[7]} | {gameMarkers[8]} ");
-        }
-
-        //Alternate choosing player after every turn
-        static int GetNextPlayer(int player)
-        {
-            if (player.Equals(1))
-            {
-                return 2;
-            }
-                return 1;
         }
     }
 }
