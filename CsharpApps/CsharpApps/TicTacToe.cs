@@ -44,7 +44,7 @@ namespace CsharpApps
             }
         }
 
-        //Instructions
+        // Instructions
         static void UserInstructions(int PlayerNumber)
         {
             Console.Write("Running Tic Tac Toe...");
@@ -61,7 +61,7 @@ namespace CsharpApps
             Console.WriteLine();
         }
 
-        //Draw gameboard
+        // Draw gameboard
         static void DrawGameBoard(char[] gameMarkers)
         {
             //numbered 1-8 because array starts at zero
@@ -72,7 +72,7 @@ namespace CsharpApps
             Console.WriteLine($" {gameMarkers[6]} | {gameMarkers[7]} | {gameMarkers[8]} ");
         }
 
-        //Game Logic
+        // Game Logic
         private static void GameLogic(char[] gameMarkers, int currentPlayer)
         {
             bool notValidMove = true;
@@ -117,7 +117,7 @@ namespace CsharpApps
             } while (notValidMove);
         }
 
-        //Who's turn is it?
+        // Who's turn is it?
         private static char GetPlayerMarker(int Player)
         {
             if (Player % 2 == 0)
@@ -128,7 +128,7 @@ namespace CsharpApps
             return 'X';
         }
 
-        //Alternate choosing player after every turn
+        // Alternate choosing player after every turn
         static int GetNextPlayer(int player)
         {
             if (player.Equals(1))
@@ -138,7 +138,7 @@ namespace CsharpApps
                 return 1;
         }
 
-        //Game Result
+        // Game Result
         private static int GetWinner(char[] gameMarkers)
         {
             if (IsGameWinner(gameMarkers))
@@ -154,7 +154,7 @@ namespace CsharpApps
             return 0;
         }
 
-        //Win outcomes
+        // Win outcomes
         private static bool IsGameWinner(char[] gameMarkers)
         {
             if (IsGameMarkersTheSame(gameMarkers, 0, 1, 2))
@@ -200,7 +200,7 @@ namespace CsharpApps
             return false;
         }
 
-        //Draw outcome
+        // Draw outcome
         private static bool IsGameDraw(char[] gameMarkers)
         {
             return gameMarkers[0] != '1' &&
@@ -214,7 +214,7 @@ namespace CsharpApps
                    gameMarkers[8] != '9';
         }
 
-        //Can't use marked tile
+        // Can't use marked tile
         private static bool IsGameMarkersTheSame(char[] testGameMarkers, int pos1, int pos2, int pos3)
         {
             return testGameMarkers[pos1].Equals(testGameMarkers[pos2]) && testGameMarkers[pos2].Equals(testGameMarkers[pos3]);
