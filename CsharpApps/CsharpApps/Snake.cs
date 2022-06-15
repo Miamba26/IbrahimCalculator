@@ -8,130 +8,144 @@ namespace CsharpApps
 {
     internal class Snake
     {
-        int Height = 20;
-        int Width = 30;
-
-        int[] X = new int[50];
-        int[] Y = new int[50];
-
-        int fruitX;
-        int fruitY;
-        int parts = 3;
-
-        ConsoleKeyInfo keyInfo = new ConsoleKeyInfo();
-        char key = 'W';
-
-        Random rnd = new Random();
-
-        Snake()
-        {
-            X[0] = 5;
-            Y[0] = 5;
-            Console.CursorVisible = false;
-            fruitX = rnd.Next(2, (Width - 2));
-            fruitY = rnd.Next(2, (Height - 2));
-        }
         public void RunApp()
         {
-            Snake snake = new Snake();
+            int xPosition = 35;
+            int yPosition = 20;
+            int appleXDim = 10;
+            int appleYDim = 10;
+            int applesEaten = 0;
+
+            decimal gameSpeed = 150m;
+
+            bool isGameOn = true;
+            bool isWallHit = false;
+            bool isAppleEaten = false;
+
+            Random random = new Random();
+
+            // Place snake on screen
+            Console.SetCursorPosition(xPosition, yPosition);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine((char)214);
+
+            // Set apple on screen
+            setApplePositionOnScreen(random, out appleXDim, out appleYDim);
+            paintApple(appleXDim, appleYDim);
+
+            // Create Boundary
+            buildWall();
+
+            // Snake move
+
+            ConsoleKey command = Console.ReadKey().Key;
+
             do
             {
-            
-                snake.BuildBoard();
-
-                snake.Input();
-
-                snake.GameLogic();
-
-            } while (true);
-
-            Console.ReadKey();
-        }
-
-
-        public void BuildBoard()
-        {
-            Console.Clear();
-            for (int i = 1; i <= (Width + 2); i++)
-            {
-                Console.SetCursorPosition(i, 1);
-                Console.WriteLine("-");
-            }
-            for (int i = 1; i <= (Width + 2); i++)
-            {
-                Console.SetCursorPosition(i, (Height + 2));
-                Console.WriteLine("-");
-            }
-            for (int i = 1; i <= (Height + 1); i++)
-            {
-                Console.SetCursorPosition(1, i);
-                Console.WriteLine("|");
-            }
-            for (int i = 1; i <= (Height + 1); i++)
-            {
-                Console.SetCursorPosition((Width + 2), i);
-                Console.WriteLine("|");
-            }
-        }
-
-        public void Input()
-        {
-            if (Console.KeyAvailable)
-            {
-                keyInfo = Console.ReadKey(true);
-                key = keyInfo.KeyChar;
-            }
-        }
-
-        public void WritePoint(int x, int y)
-        {
-            Console.SetCursorPosition(x, y);
-            Console.Write("#");
-        }
-
-        public void GameLogic()
-        {
-            if (X[0]==fruitX)
-            {
-                if (Y[0]==fruitY)
+                switch (command)
                 {
-                    parts++;
-                    fruitX = rnd.Next(2, (Width - 2));
-                    fruitY = rnd.Next(2, (Height - 2));
+                    case ConsoleKey.LeftArrow:
+                        Console.SetCursorPosition(xPosition, yPosition);
+                        Console.WriteLine(" ");
+                        xPosition--;
+                        break;
+
+                    case ConsoleKey.UpArrow:
+                        Console.SetCursorPosition(xPosition, yPosition);
+                        Console.WriteLine(" ");
+                        yPosition--;
+                        break;
+
+                    case ConsoleKey.RightArrow:
+                        Console.SetCursorPosition(xPosition, yPosition);
+                        Console.WriteLine(" ");
+                        xPosition++;
+                        break;
+
+                    case ConsoleKey.DownArrow:
+                        Console.SetCursorPosition(xPosition, yPosition);
+                        Console.WriteLine(" ");
+                        yPosition++;
+                        break;
                 }
-            }
-            for (int i = parts; i > 1; i--)
+
+                Console.SetCursorPosition(xPosition, yPosition);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine((char)214);
+
+                isWallHit = DidSnakeHitWall(xPosition, yPosition);
+
+                // Detect when snake hits boundary
+                if (isWallHit)
+                {
+                    isGameOn = false;
+                    Console.SetCursorPosition(28, 20);
+                    Console.WriteLine("Snake hit the wall and died!");
+                }
+
+                // Detect when apple was eaten
+                isAppleEaten = determineIfAppleWasEaten(xPosition, yPosition, appleXDim, appleYDim);
+
+                // Place apple on board (random)
+                if (isAppleEaten)
+                {
+                    setApplePositionOnScreen(random, out appleXDim, out appleYDim);
+                    paintApple(appleXDim, appleYDim);
+                    applesEaten++;
+                    gameSpeed *= .925m;
+                }
+
+                if (Console.KeyAvailable) command = Console.ReadKey().Key;
+                // Slow game down
+                System.Threading.Thread.Sleep(Convert.ToInt32(gameSpeed));
+
+            } while (isGameOn);
+
+        }
+
+        private static void buildWall()
+        {
+            for (int i = 1; i < 41; i++)
             {
-                X[i - 1] = X[i - 2];
-                Y[i - 1] = Y[i - 2];
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(1, i);
+                Console.WriteLine("#");
+                Console.SetCursorPosition(70, i);
+                Console.WriteLine("#");
             }
-            switch (key)
+
+            for (int i = 1; i < 71; i++)
             {
-                case 'w':
-                    Y[0]--;
-                    break;
-
-                case 'a':
-                    X[0]--;
-                    break;
-
-                case 's':
-                    Y[0]++;
-                    break;
-
-                case 'd':
-                    X[0]++;
-                    break;
-
-                default:
-                    break;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetCursorPosition(i, 1);
+                Console.WriteLine("#");
+                Console.SetCursorPosition(i, 40);
+                Console.WriteLine("#");
             }
-            for (int i = 0; i <= (parts-1); i++)
-            {
-                WritePoint(X[i], Y[i]);
-                WritePoint(fruitX, fruitY);
-            }
-            Thread.Sleep(100);
+        }
+
+        private static void setApplePositionOnScreen(Random random, out int appleXDim, out int appleYDim)
+        {
+            appleXDim = random.Next(0 + 2, 70 - 2);
+            appleYDim = random.Next(0 + 2, 40 - 2);
+        }
+
+        private static void paintApple(int appleXDim, int appleYDim)
+        {
+            Console.SetCursorPosition(appleXDim, appleYDim);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write((char)64);
+        }
+
+        private static bool determineIfAppleWasEaten(int xPosition, int yPosition, int appleXDim, int appleYDim)
+        {
+            if (xPosition == appleXDim && yPosition == appleYDim) return true; return false;
+        }
+
+        // Detect when snake hits boundary
+        private static bool DidSnakeHitWall(int xPosition, int yPosition)
+        {
+            if (xPosition == 1 || xPosition == 70 || yPosition == 1 || yPosition == 40) return true; return false;
         }
     }
 }
