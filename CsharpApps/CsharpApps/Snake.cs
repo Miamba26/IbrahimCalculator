@@ -13,7 +13,7 @@ namespace CsharpApps
             int[] xPosition = new int[50];
                 xPosition[0] = 35;
             int[] yPosition = new int[50];
-            yPosition[0] = 20;
+                yPosition[0] = 20;
             int appleXDim = 10;
             int appleYDim = 10;
             int applesEaten = 0;
@@ -161,7 +161,7 @@ namespace CsharpApps
             // Paint the body
             for (int i = 1; i < applesEaten + 1; i++)
             {
-                Console.SetCursorPosition(xPositionIn[1], yPositionIn[i]);
+                Console.SetCursorPosition(xPositionIn[1], yPositionIn[1]);
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("o");
             }
