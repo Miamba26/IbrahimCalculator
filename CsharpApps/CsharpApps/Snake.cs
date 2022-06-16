@@ -10,8 +10,10 @@ namespace CsharpApps
     {
         public void RunApp()
         {
-            int xPosition = 35;
-            int yPosition = 20;
+            int[] xPosition = new int[50];
+                xPosition[0] = 35;
+            int[] yPosition = new int[50];
+            yPosition[0] = 20;
             int appleXDim = 10;
             int appleYDim = 10;
             int applesEaten = 0;
@@ -24,10 +26,11 @@ namespace CsharpApps
 
             Random random = new Random();
 
+            Console.CursorVisible = false;
+
             // Place snake on screen
-            Console.SetCursorPosition(xPosition, yPosition);
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine((char)214);
+            setApplePositionOnScreen(random, out appleXDim, out appleYDim);
+            paintApple(appleXDim, appleYDim);
 
             // Set apple on screen
             setApplePositionOnScreen(random, out appleXDim, out appleYDim);
@@ -37,7 +40,6 @@ namespace CsharpApps
             buildWall();
 
             // Snake move
-
             ConsoleKey command = Console.ReadKey().Key;
 
             do
@@ -45,35 +47,34 @@ namespace CsharpApps
                 switch (command)
                 {
                     case ConsoleKey.LeftArrow:
-                        Console.SetCursorPosition(xPosition, yPosition);
+                        Console.SetCursorPosition(xPosition[0], yPosition[0]);
                         Console.WriteLine(" ");
-                        xPosition--;
+                        xPosition[0]--;
                         break;
 
                     case ConsoleKey.UpArrow:
-                        Console.SetCursorPosition(xPosition, yPosition);
+                        Console.SetCursorPosition(xPosition[0], yPosition[0]);
                         Console.WriteLine(" ");
-                        yPosition--;
+                        yPosition[0]--;
                         break;
 
                     case ConsoleKey.RightArrow:
-                        Console.SetCursorPosition(xPosition, yPosition);
+                        Console.SetCursorPosition(xPosition[0], yPosition[0]);
                         Console.WriteLine(" ");
-                        xPosition++;
+                        xPosition[0]++;
                         break;
 
                     case ConsoleKey.DownArrow:
-                        Console.SetCursorPosition(xPosition, yPosition);
+                        Console.SetCursorPosition(xPosition[0], yPosition[0]);
                         Console.WriteLine(" ");
-                        yPosition++;
+                        yPosition[0]++;
                         break;
                 }
 
-                Console.SetCursorPosition(xPosition, yPosition);
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine((char)214);
+                // Paint the snake, Make snake longer
+                paintSnake(applesEaten, xPosition, yPosition, out xPosition, out yPosition);
 
-                isWallHit = DidSnakeHitWall(xPosition, yPosition);
+                isWallHit = DidSnakeHitWall(xPosition[0], yPosition[0]);
 
                 // Detect when snake hits boundary
                 if (isWallHit)
@@ -84,14 +85,17 @@ namespace CsharpApps
                 }
 
                 // Detect when apple was eaten
-                isAppleEaten = determineIfAppleWasEaten(xPosition, yPosition, appleXDim, appleYDim);
+                isAppleEaten = determineIfAppleWasEaten(xPosition[0], yPosition[0], appleXDim, appleYDim);
 
                 // Place apple on board (random)
                 if (isAppleEaten)
                 {
                     setApplePositionOnScreen(random, out appleXDim, out appleYDim);
                     paintApple(appleXDim, appleYDim);
+                    // Keep track of how many apples were eaten
+                    // Make snake longer
                     applesEaten++;
+                    // Make snake faster
                     gameSpeed *= .925m;
                 }
 
@@ -144,6 +148,40 @@ namespace CsharpApps
         private static bool determineIfAppleWasEaten(int xPosition, int yPosition, int appleXDim, int appleYDim)
         {
             if (xPosition == appleXDim && yPosition == appleYDim) return true; return false;
+        }
+
+        // Paint Snake
+        private static void paintSnake(int applesEaten, int[] xPositionIn, int[] yPositionIn, out int[] xPositionOut, out int[] yPositionOut)
+        {
+            // Paint the head
+            Console.SetCursorPosition(xPositionIn[0], yPositionIn[0]);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine((char)214);
+
+            // Paint the body
+            for (int i = 1; i < applesEaten + 1; i++)
+            {
+                Console.SetCursorPosition(xPositionIn[1], yPositionIn[i]);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("o");
+            }
+
+            // Remove last part of snake
+            Console.SetCursorPosition(xPositionIn[applesEaten + 1], yPositionIn[applesEaten + 1]);
+            Console.WriteLine(" ");
+
+            // Record location of each body part
+            for (int i = applesEaten + 1; i > 0; i--)
+            {
+                xPositionIn[i] = xPositionIn[i - 1];
+                yPositionIn[i] = yPositionIn[i - 1];
+            }
+
+            // Return the new array
+            xPositionOut = xPositionIn;
+            yPositionOut = yPositionIn;
+
+
         }
 
         // Detect when snake hits boundary
