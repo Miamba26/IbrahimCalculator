@@ -103,6 +103,7 @@ namespace CsharpApps
 
         }
 
+        // Build boundary
         private static void buildWall()
         {
             for (int i = 1; i < 41; i++)
@@ -124,12 +125,14 @@ namespace CsharpApps
             }
         }
 
+        // Apple spawn on screen
         private static void setApplePositionOnScreen(Random random, out int appleXDim, out int appleYDim)
         {
             appleXDim = random.Next(0 + 2, 70 - 2);
             appleYDim = random.Next(0 + 2, 40 - 2);
         }
 
+        // Apple style
         private static void paintApple(int appleXDim, int appleYDim)
         {
             Console.SetCursorPosition(appleXDim, appleYDim);
@@ -137,6 +140,7 @@ namespace CsharpApps
             Console.Write((char)64);
         }
 
+        // Was apple eaten
         private static bool determineIfAppleWasEaten(int xPosition, int yPosition, int appleXDim, int appleYDim)
         {
             if (xPosition == appleXDim && yPosition == appleYDim) return true; return false;
