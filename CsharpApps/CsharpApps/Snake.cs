@@ -78,7 +78,7 @@ namespace CsharpApps
 
                 isWallHit = DidSnakeHitWall(xPosition[0], yPosition[0]);
 
-                // Detect when snake hits boundary
+                // Detect when snake hits boundary and show score
                 if (isWallHit)
                 {
                     isGameOn = false;
