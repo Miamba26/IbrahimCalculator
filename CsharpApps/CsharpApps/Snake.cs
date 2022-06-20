@@ -82,8 +82,11 @@ namespace CsharpApps
                 if (isWallHit)
                 {
                     isGameOn = false;
-                    Console.SetCursorPosition(28, 20);
+                    Console.SetCursorPosition(23, 20);
                     Console.WriteLine("Snake hit the wall and died!");
+                    Console.WriteLine();
+                    Console.SetCursorPosition(28, 21);
+                    Console.WriteLine("Your score is: " + applesEaten * 50 + "!" );
                 }
 
                 // Detect when apple was eaten
