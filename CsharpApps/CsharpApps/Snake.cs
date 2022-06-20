@@ -74,7 +74,7 @@ namespace CsharpApps
                 }
 
                 // Paint the snake, Make snake longer
-                paintSnake(applesEaten, xPosition, yPosition, out xPosition, out yPosition);
+                snakeStyle(applesEaten, xPosition, yPosition, out xPosition, out yPosition);
 
                 isWallHit = DidSnakeHitWall(xPosition[0], yPosition[0]);
 
@@ -155,8 +155,8 @@ namespace CsharpApps
             if (xPosition == appleXDim && yPosition == appleYDim) return true; return false;
         }
 
-        // Paint Snake
-        private static void paintSnake(int applesEaten, int[] xPositionIn, int[] yPositionIn, out int[] xPositionOut, out int[] yPositionOut)
+        // Snake style
+        private static void snakeStyle(int applesEaten, int[] xPositionIn, int[] yPositionIn, out int[] xPositionOut, out int[] yPositionOut)
         {
             // Paint the head
             Console.SetCursorPosition(xPositionIn[0], yPositionIn[0]);
