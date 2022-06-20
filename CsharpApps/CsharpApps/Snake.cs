@@ -10,6 +10,8 @@ namespace CsharpApps
     {
         public void RunApp()
         {
+            Console.Clear();
+
             int[] xPosition = new int[50];
                 xPosition[0] = 35;
             int[] yPosition = new int[50];
