@@ -28,6 +28,7 @@ namespace CsharpApps
 
             Random random = new Random();
 
+            // Hide cursor
             Console.CursorVisible = false;
 
             // Place snake on screen
