@@ -32,11 +32,11 @@ namespace CsharpApps
 
             // Place snake on screen
             setApplePositionOnScreen(random, out appleXDim, out appleYDim);
-            paintApple(appleXDim, appleYDim);
+            appleStyle(appleXDim, appleYDim);
 
             // Set apple on screen
             setApplePositionOnScreen(random, out appleXDim, out appleYDim);
-            paintApple(appleXDim, appleYDim);
+            appleStyle(appleXDim, appleYDim);
 
             // Create Boundary
             buildWall();
@@ -96,7 +96,7 @@ namespace CsharpApps
                 if (isAppleEaten)
                 {
                     setApplePositionOnScreen(random, out appleXDim, out appleYDim);
-                    paintApple(appleXDim, appleYDim);
+                    appleStyle(appleXDim, appleYDim);
                     // Keep track of how many apples were eaten
                     // Make snake longer
                     applesEaten++;
@@ -142,7 +142,7 @@ namespace CsharpApps
         }
 
         // Apple style
-        private static void paintApple(int appleXDim, int appleYDim)
+        private static void appleStyle(int appleXDim, int appleYDim)
         {
             Console.SetCursorPosition(appleXDim, appleYDim);
             Console.ForegroundColor = ConsoleColor.Red;
