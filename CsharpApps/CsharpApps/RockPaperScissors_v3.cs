@@ -12,6 +12,8 @@ namespace CsharpApps
 
         public void RunApp()
         {
+            Console.Clear();
+
             Console.Write("Running Rock, Paper Scissors...");
             Console.WriteLine();
             Console.WriteLine();

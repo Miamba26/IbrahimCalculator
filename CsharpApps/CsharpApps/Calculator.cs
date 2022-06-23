@@ -16,6 +16,8 @@ namespace CsharpApps
 
             do
             {
+                Console.Clear();
+
                 Console.Write("Enter first number: ");
                 string? num1Str = Console.ReadLine();
                 if (num1Str != null && num1Str == "exit") return;
