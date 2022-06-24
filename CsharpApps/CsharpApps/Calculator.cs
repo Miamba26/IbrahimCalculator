@@ -13,11 +13,9 @@ namespace CsharpApps
             Console.Write("Running Calculator...");
             Console.WriteLine();
             Console.WriteLine();
-
+            Console.Clear();
             do
             {
-                Console.Clear();
-
                 Console.Write("Enter first number: ");
                 string? num1Str = Console.ReadLine();
                 if (num1Str != null && num1Str == "exit") return;
