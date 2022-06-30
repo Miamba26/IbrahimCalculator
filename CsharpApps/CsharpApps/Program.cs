@@ -37,6 +37,8 @@
                         Console.WriteLine("Please choose a valid app");
                         break;
                 }
+
+                Console.Clear();
             } while (true);
         }
     }

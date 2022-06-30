@@ -13,34 +13,30 @@ namespace CsharpApps
             Console.Clear();
 
             int[] xPosition = new int[50];
-                xPosition[0] = 35;
-            int[] yPosition = new int[50];
-                yPosition[0] = 20;
-            int appleXDim = 10;
-            int appleYDim = 10;
-            int applesEaten = 0;
+            xPosition[0] = 35;
 
+            int[] yPosition = new int[50];
+            yPosition[0] = 20;
+            
+            int applesEaten = 0;
             decimal gameSpeed = 150m;
 
             bool isGameOn = true;
-            bool isWallHit = false;
-            bool isAppleEaten = false;
-
-            Random random = new Random();
+            Random random = new();
 
             // Hide cursor
             Console.CursorVisible = false;
 
             // Place snake on screen
-            setApplePositionOnScreen(random, out appleXDim, out appleYDim);
-            appleStyle(appleXDim, appleYDim);
+            SetApplePositionOnScreen(random, out int appleXDim, out int appleYDim);
+            AppleStyle(appleXDim, appleYDim);
 
             // Set apple on screen
-            setApplePositionOnScreen(random, out appleXDim, out appleYDim);
-            appleStyle(appleXDim, appleYDim);
+            SetApplePositionOnScreen(random, out appleXDim, out appleYDim);
+            AppleStyle(appleXDim, appleYDim);
 
             // Create Boundary
-            buildWall();
+            BuildWall();
 
             // Snake move
             ConsoleKey command = Console.ReadKey().Key;
@@ -75,29 +71,29 @@ namespace CsharpApps
                 }
 
                 // Paint the snake, Make snake longer
-                snakeStyle(applesEaten, xPosition, yPosition, out xPosition, out yPosition);
+                SnakeStyle(applesEaten, xPosition, yPosition, out xPosition, out yPosition);
 
-                isWallHit = DidSnakeHitWall(xPosition[0], yPosition[0]);
+                bool hasSnakeHitWall = HasSnakeHitWall(xPosition[0], yPosition[0]);
 
                 // Detect when snake hits boundary and show score
-                if (isWallHit)
+                if (hasSnakeHitWall)
                 {
                     isGameOn = false;
                     Console.SetCursorPosition(23, 20);
                     Console.WriteLine("Snake hit the wall and died!");
                     Console.WriteLine();
                     Console.SetCursorPosition(28, 21);
-                    Console.WriteLine("Your score is: " + applesEaten * 50 + "!" );
+                    Console.WriteLine("Your score is: " + applesEaten * 50 + "!");
                 }
 
                 // Detect when apple was eaten
-                isAppleEaten = determineIfAppleWasEaten(xPosition[0], yPosition[0], appleXDim, appleYDim);
+                bool isAppleEaten = WasAppleEaten(xPosition[0], yPosition[0], appleXDim, appleYDim);
 
                 // Place apple on board (random)
                 if (isAppleEaten)
                 {
-                    setApplePositionOnScreen(random, out appleXDim, out appleYDim);
-                    appleStyle(appleXDim, appleYDim);
+                    SetApplePositionOnScreen(random, out appleXDim, out appleYDim);
+                    AppleStyle(appleXDim, appleYDim);
                     // Keep track of how many apples were eaten
                     // Make snake longer
                     applesEaten++;
@@ -106,15 +102,16 @@ namespace CsharpApps
                 }
 
                 if (Console.KeyAvailable) command = Console.ReadKey().Key;
+
                 // Slow game down
-                System.Threading.Thread.Sleep(Convert.ToInt32(gameSpeed));
+                Thread.Sleep(Convert.ToInt32(gameSpeed));
 
             } while (isGameOn);
 
+            Console.ReadLine();
         }
 
-        // Build boundary
-        private static void buildWall()
+        private static void BuildWall()
         {
             for (int i = 1; i < 41; i++)
             {
@@ -135,29 +132,25 @@ namespace CsharpApps
             }
         }
 
-        // Apple spawn on screen
-        private static void setApplePositionOnScreen(Random random, out int appleXDim, out int appleYDim)
+        private static void SetApplePositionOnScreen(Random random, out int appleXDim, out int appleYDim)
         {
             appleXDim = random.Next(0 + 2, 70 - 2);
             appleYDim = random.Next(0 + 2, 40 - 2);
         }
 
-        // Apple style
-        private static void appleStyle(int appleXDim, int appleYDim)
+        private static void AppleStyle(int appleXDim, int appleYDim)
         {
             Console.SetCursorPosition(appleXDim, appleYDim);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write((char)64);
         }
 
-        // Was apple eaten
-        private static bool determineIfAppleWasEaten(int xPosition, int yPosition, int appleXDim, int appleYDim)
+        private static bool WasAppleEaten(int xPosition, int yPosition, int appleXDim, int appleYDim)
         {
             if (xPosition == appleXDim && yPosition == appleYDim) return true; return false;
         }
 
-        // Snake style
-        private static void snakeStyle(int applesEaten, int[] xPositionIn, int[] yPositionIn, out int[] xPositionOut, out int[] yPositionOut)
+        private static void SnakeStyle(int applesEaten, int[] xPositionIn, int[] yPositionIn, out int[] xPositionOut, out int[] yPositionOut)
         {
             // Paint the head
             Console.SetCursorPosition(xPositionIn[0], yPositionIn[0]);
@@ -190,8 +183,7 @@ namespace CsharpApps
 
         }
 
-        // Detect when snake hits boundary
-        private static bool DidSnakeHitWall(int xPosition, int yPosition)
+        private static bool HasSnakeHitWall(int xPosition, int yPosition)
         {
             if (xPosition == 1 || xPosition == 70 || yPosition == 1 || yPosition == 40) return true; return false;
         }
