@@ -27,12 +27,8 @@ namespace CsharpApps
             // Hide cursor
             Console.CursorVisible = false;
 
-            // Place snake on screen
+            // Place apple on screen
             SetApplePositionOnScreen(random, out int appleXDim, out int appleYDim);
-            AppleStyle(appleXDim, appleYDim);
-
-            // Set apple on screen
-            SetApplePositionOnScreen(random, out appleXDim, out appleYDim);
             AppleStyle(appleXDim, appleYDim);
 
             // Create Boundary
