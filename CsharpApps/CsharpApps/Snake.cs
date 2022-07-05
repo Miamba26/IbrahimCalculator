@@ -91,6 +91,8 @@ namespace CsharpApps
                     SetApplePositionOnScreen(random, out appleXDim, out appleYDim);
                     AppleStyle(appleXDim, appleYDim);
                     // Keep track of how many apples were eaten
+                    // Beep
+                    Console.Beep();
                     // Make snake longer
                     applesEaten++;
                     // Make snake faster
