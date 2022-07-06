@@ -76,6 +76,7 @@ namespace CsharpApps
                 {
                     isGameOn = false;
                     Console.SetCursorPosition(23, 20);
+                    Console.Beep();
                     Console.WriteLine("Snake hit the wall and died!");
                     Console.WriteLine();
                     Console.SetCursorPosition(28, 21);
@@ -91,8 +92,6 @@ namespace CsharpApps
                     SetApplePositionOnScreen(random, out appleXDim, out appleYDim);
                     AppleStyle(appleXDim, appleYDim);
                     // Keep track of how many apples were eaten
-                    // Beep
-                    Console.Beep();
                     // Make snake longer
                     applesEaten++;
                     // Make snake faster
